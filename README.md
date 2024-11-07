@@ -23,10 +23,14 @@
 ## Installation
 
 1. Clone the repository:
-   git clone https://github.com/yourusername/your-repo.git
+   ```bash
+   git clone https://github.com/mwadood22/E-Commerce-Rails.git
    cd your-repo
-2. Install dependencies:
+   ```
+3. Install dependencies:
+   ```bash
    bundle install
+   ```
 
 ## Configuration
 
@@ -36,11 +40,17 @@
 ## Database Setup
 
 1. Create the database:
+   ```bash
    rails db:create
-2. Migrate the database:
+   ```
+3. Migrate the database:
+   ```bash
    rails db:migrate
-3. (Optional) Seed the database with initial data:
+   ```
+5. (Optional) Seed the database with initial data:
+   ```bash
    rails db:seed
+   ```
 
 ## Running the App
 
@@ -53,7 +63,9 @@
 ## Testing
 
 - Run the test suite with the following command:
+  ```bash
   rails test
+  ```
 
 ## Deployment
 
@@ -69,8 +81,9 @@ Set up the necessary environment variables, such as:
 ### 2. Asset Precompilation
 
 Precompile assets by running:
-
+```bash
 - rails assets:precompile
+```
 
 ### 3. Server Configuration
 

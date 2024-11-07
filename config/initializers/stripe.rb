@@ -1,0 +1,1 @@
+Stripe.api_key = 'your_test_key_here'

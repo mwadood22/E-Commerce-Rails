@@ -1,0 +1,13 @@
+<%= form_with model: [@product, @product.comments.build ], local: false do |form| %>
+  <%= form.hidden_field :commenter, value: current_user.name %>
+  <p>
+    <% form.label :body %>
+    <div class="d-flex justify-content-center pt-3 pb-2">
+      <%= form.text_area :body, placeholder:"+ Add a Comment", class:"form-control addtxt" %>
+    </div>
+  </p>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <p>
+    <%= form.submit "Comment", class:"btn btn-sm btn-light"%>
+  </p>
+<% end %>

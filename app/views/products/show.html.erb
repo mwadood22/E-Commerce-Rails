@@ -1,0 +1,68 @@
+  <div class = "row">
+  <div class = "col-sm-8">
+  <div class="m-auto">
+        <div class="card m-auto w-75 h-100" style="width: 18rem;">
+           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+            <% if @product.images.attached? %>
+                <% i=1 %>
+                <% @product.images.each do |image| %>
+                  <% if i == 1 %>
+                    <div class="carousel-item active">
+                      <%= link_to image_tag(image, :class => "bd-placeholder-img card-img-top d-block w-100",size:"500"), @product %>
+                    </div>
+                  <% else %>
+                    <div class="carousel-item">
+                      <%= link_to image_tag(image, :class => "bd-placeholder-img card-img-top d-block w-100",size:"500"), @product %>
+                    </div>
+                  <% end %>
+                  <% i += 1 %>
+                <% end %>
+            <button class="carousel-control-prev btn-black" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color:black">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color:black">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+            </button>
+                </div>
+            <% end %>
+          </div>
+          <div class="card-body">
+          <h5 class="card-title"><%= @product.title %> (<%= number_to_currency @product.price %>)</h5>
+          <p class="card-text"><%= @product.description %></p>
+                  <% if product_author(@product)%>
+                      <%= link_to "Edit", edit_product_path(@product), class: "btn btn-secondary" %>
+                      <%= link_to "Delete", product_path(@product), method: :delete, class: "btn btn-danger" %>
+                  <% else %>
+                      <%= form_tag order_items_path do%>
+                      <%= hidden_field_tag :product_id, @product.id%>
+                      <%= number_field_tag :quantity, 1, min:1, max:10, class:"form-control"%>
+                      <br/>
+                      <%= submit_tag "Add to Cart", class: "btn btn-primary" %>
+                      <% end %>
+                  <% end %>
+                  </div>
+            </div>
+         
+      </div>
+      </div>
+<div class = "card col-sm-4" style="height: 40rem; width: 25rem;">
+<h2 class="card-header">Comments:</h2>
+<br/>
+<div class="overflow-auto" id="comment_pane">
+      <%= render @product.comments.order(id: :desc) %>
+</div>
+
+      <% if user_signed_in? %>
+    <% unless product_author(@product)%>
+      <%= render 'comments/form'%>
+    <% end %>
+    <%end%>
+  
+  </div>
+  </div>
+
+    
+

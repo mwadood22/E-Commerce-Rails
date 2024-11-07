@@ -1,0 +1,43 @@
+<%= form_with model: @product do |f| %>
+
+    <div class="hidden">
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field form-group">
+    <% f.label :title %><br />
+    <%= f.text_field :title, class:"form-control", placeholder:"Title", autofocus: true, autocomplete: "title", required:"true" %>
+  </div>
+  <br/>
+
+  <div class="field form-group">
+    <% temp = {} %>
+    <% @categories.each do |cat|%>
+       <% temp[cat.title] = cat.id%>
+    <%end%>
+    <%= f.select(:category_id, options_for_select(temp),{:prompt => "Select Category"},{ :class => 'form-select', required:"true"} )%>
+    </div>
+
+  <div class="field form-group">
+    <% f.label :description %><br />
+    <%= f.text_area :description, class:"form-control", placeholder:"Description", autocomplete: "description",required:"true" %>
+  </div>
+
+  <div class="field form-group">
+    <% f.label :price %><br />
+    <%= f.text_field :price, class:"form-control", type:"number", min:"0", oninput:"validity.valid||(value='');", placeholder:"Price", autocomplete: "price", required:"true" %>
+  </div>
+
+ <div class="field form-group">
+    <% f.label :images %><br />
+    <%= f.file_field :images, class:"form-control", required:"true", multiple:"true" %>
+  </div>
+
+  <br/>
+
+  <div class="actions">
+    <%= f.submit "Add", class:"btn btn-secondary" %>
+  </div>
+
+<% end %>

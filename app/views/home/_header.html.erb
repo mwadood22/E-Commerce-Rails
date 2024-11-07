@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+  <div class="container-fluid">
+    <%= link_to 'Daraz', root_path, class:"navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'About Us', home_about_path, class:"nav-link" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Add Products', new_product_path, class:"nav-link" %>
+          </li>
+        <% end %>
+        
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+          
+              <% $categories.each do |category| %>
+            <li class="dropdown-item">
+                <%= link_to category_products_path(category) do %>
+                  <%= category.title %>
+                    <!--(<#%= category.products_count %>)-->
+                <% end %>
+            </li>
+              <% end %>
+            <li><hr class="dropdown-divider"></li>
+          </ul>
+        </li>
+      </ul>
+
+<form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" data-behavior = "autocomplete" >
+      </form>
+&nbsp; &nbsp;
+
+<form class="d-flex">
+        <%= link_to '<i class="fas fa-light fa-shopping-cart" style="color:white">
+        '.html_safe + current_cart.orders_count.to_s +  '</i>'.html_safe, cart_path, :class => "text-white text-decoration-none" %>
+        </form>
+      &nbsp; &nbsp;
+      
+<form class="d-flex">
+<div class="collapse navbar-collapse dropstart" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+        <% if user_signed_in? %>
+          <a class="nav-link" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag user_avatar(current_user),size:"30", class: "rounded-circle"%>
+          </a>
+          <% else %>
+          <a class="nav-link" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag 'default_avatar.jpg',size:"30", class: "rounded-circle"%>
+          </a>
+          <% end %>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <% if user_signed_in? %>
+          <li class="dropdown-item">
+            <%= link_to 'Sign Out', destroy_user_session_path,
+                                    method: :delete,
+                                    class:"nav-link" %>
+          </li>
+          <li class="dropdown-item">
+            <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link" %>
+          </li>
+          
+        <% else %>
+          <li class="dropdown-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class:"nav-link" %>
+          </li>
+          <li class="dropdown-item">
+            <%= link_to 'Sign In', new_user_session_path, class:"nav-link" %>
+          </li>
+        <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</form>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,11 @@
+<%= form_with model: [@product, @comment] do |form| %>
+
+      <%= form.hidden_field :commenter, value: current_user.name %>
+      <p>
+        <% form.label :body %>
+        <%= form.text_area :body%>
+        </p>
+        <p>
+        <%= form.submit%>
+        </p>
+        <% end %>

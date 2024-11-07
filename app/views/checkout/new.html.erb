@@ -1,0 +1,24 @@
+<%= form_tag checkout_index_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error]%></p>
+      </div>
+    <% end %>
+
+    <label class="amount">
+      <span>Amount: <%=current_cart.sub_total%></span>
+    </label>
+  </article>
+
+  <script
+    src="https://checkout.stripe.com/checkout.js"
+    class="stripe-button"
+    data-key="pk_test_51JT20qDoS01ZwdzkVsMn0Kuj8CBo8IPZVAyhvtiuF1b5P8gQAtmOMYNRy9AxhTqYtUsU1PdUkMGtZkSPkU6Gr3Pw00JslelYq6"
+    data-name="Products"
+    data-description="Cart Payment"
+    data-amount= <%=current_cart.sub_total * 100%>
+    data-currency="usd">
+  </script>
+
+<% end %>  
